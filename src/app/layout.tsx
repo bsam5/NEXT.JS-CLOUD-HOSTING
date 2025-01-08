@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Kufi_Arabic } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
@@ -36,6 +38,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${kufiArabic.variable} antialiased`}
       >
         <Header></Header>
+        <ToastContainer theme="colored" position="top-center" />
         <main>{children}</main>
         <Footer></Footer>
       </body>
