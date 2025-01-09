@@ -1,8 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handelSubmit = (e: React.FormEvent) => {
@@ -10,6 +12,7 @@ const LoginForm = () => {
     if (email === "") return toast.error("Email Is Required");
     if (password === "") return toast.error("Password Is Required");
     console.log(email, password);
+    router.replace("/");
   };
   return (
     <form className="flex flex-col" onSubmit={handelSubmit}>

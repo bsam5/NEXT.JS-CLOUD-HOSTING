@@ -1,31 +1,25 @@
-"use client";
-import { useEffect, useState } from "react";
 import { Article } from "@/utils/types";
 import ArticleItem from "@/components/Articles/ArticleItem";
-import { error } from "console";
+import Pagination from "@/components/Articles/Pagination";
+import SearchArticleInput from "@/components/Articles/SearchArticleInput";
 
-const Articles = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
+const Articles = async () => {
+  await new Promise((re) => setTimeout(re, 2000));
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
-      const data: Article[] = await response.json();
-      setArticles(data);
-      if (!response.ok) throw new Error("Field To Fetch Articles");
-    };
-    fetchData();
-  }, []);
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const data: Article[] = await response.json();
+  const articles = data;
+  if (!response.ok) throw new Error("Field To Fetch Articles");
 
   return (
     <section className="container m-auto px-5">
+      <SearchArticleInput />
       <div className="flex justify-center items-center gap-7 flex-wrap mt-3">
-        {articles.map((item) => (
+        {articles.slice(0, 6).map((item) => (
           <ArticleItem key={item.id} article={item} />
         ))}
       </div>
+      <Pagination />
     </section>
   );
 };
